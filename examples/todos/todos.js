@@ -81,7 +81,7 @@ $(function(){
     // The DOM events specific to an item.
     events: {
       "click .toggle"   : "toggleDone",
-      "dblclick .view"  : "edit",
+      "click .view"  : "edit",
       "click a.destroy" : "clear",
       "keypress .edit"  : "updateOnEnter",
       "blur .edit"      : "close"
@@ -211,6 +211,11 @@ $(function(){
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
+	  if (Todos.where({title: this.input.val()}).length) {
+		  alert("same");
+		  return;
+	  }
+	  
       Todos.create({title: this.input.val()});
       this.input.val('');
     },
